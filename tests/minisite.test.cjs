@@ -4,6 +4,16 @@ const {test} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
+test('both page templates include the supplied Cloudflare beacon exactly once',()=>{
+  for (const file of ['site/index.html','site/answer.html']) {
+    const html=fs.readFileSync(file,'utf8');
+    const scripts=[...html.matchAll(/<script\b[^>]*data-cf-beacon='([^']+)'[^>]*><\/script>/g)];
+    assert.equal(scripts.length,1);
+    assert.equal(JSON.parse(scripts[0][1]).token,'16ae25d601f6474c958871d21e81d946');
+    assert.ok(scripts[0][0].includes('src="https://static.cloudflareinsights.com/beacon.min.js"'));
+    assert.ok(scripts[0].index<html.indexOf('</body>'));
+  }
+});
 test('landing page has the requested title, callout order and table before chart',()=>{
   const html=fs.readFileSync('site/index.html','utf8');
   assert.ok(html.includes('<h1 id="title">Part Catalog Bench</h1>'));

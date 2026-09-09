@@ -1,7 +1,8 @@
 # Results minisite
 
 `site/` is a standalone static GitHub Pages site. It needs no package install,
-build service, model keys, private repository access, or external JavaScript.
+build service, model keys, or private repository access. Cloudflare Web Analytics
+is the only external script; the site's content and interactions work independently of it.
 All URLs are relative so a repository subpath works.
 
 The owner selected one catalog page for the site example: illustration 30–18,
@@ -71,6 +72,11 @@ both older runs and the batches assembled into the final run. Cost accounts for
 retained candidate responses and may exclude paid retries that were not recorded.
 
 ## Local preview
+
+The main and answer-page templates include the owner's Cloudflare Web Analytics
+snippet. The beacon token is a public site identifier, not an API credential.
+Traffic reports are available in the owner's Cloudflare Web Analytics dashboard.
+Forks should remove the snippet or replace its token with their own site's token.
 
 ```sh
 python3 -m http.server 8766 --bind 127.0.0.1 --directory site
