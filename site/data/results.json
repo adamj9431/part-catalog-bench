@@ -1,0 +1,798 @@
+{
+  "exported_at": "2026-09-09T00:05:10.363568+00:00",
+  "models": [
+    {
+      "assembled_at": "2026-09-08T19:41:48.546364+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.5
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.8571428571428571
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.9333333333333333
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.9
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 1.0
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.7647058823529411
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.875
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.9512195121951219
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.8076923076923077
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.8461538461538461
+        }
+      },
+      "ci95": [
+        0.8016528925619835,
+        0.9444444444444444
+      ],
+      "cost_usd": 16.21877,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.0013166,
+      "median_seconds": 5.277325208007824,
+      "model": "openai/gpt-6-astra",
+      "p95_seconds": 29.184135334013263,
+      "partial_score": 0.9051020408163265,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 16.21877,
+      "reused_responses": 50,
+      "score": 0.8739495798319328,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.8739495798319328
+    },
+    {
+      "assembled_at": "2026-09-08T20:15:10.952261+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.16666666666666666
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.8571428571428571
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.7555555555555555
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.6
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.7142857142857143
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.17647058823529413
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.625
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.6341463414634146
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.5
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.6538461538461539
+        }
+      },
+      "ci95": [
+        0.4855072463768116,
+        0.7565217391304347
+      ],
+      "cost_usd": 14.52292,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.00149,
+      "median_seconds": 14.363223166001262,
+      "model": "anthropic/claude-fable-5.1",
+      "p95_seconds": 82.0744985829806,
+      "partial_score": 0.6566087973650999,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 14.52292,
+      "reused_responses": 119,
+      "score": 0.6134453781512605,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.6134453781512605
+    },
+    {
+      "assembled_at": "2026-09-08T20:18:01.885965+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.16666666666666666
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.7857142857142857
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.5333333333333333
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.5
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.9
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.4117647058823529
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.625
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.6341463414634146
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.34615384615384615
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.5923076923076923
+        }
+      },
+      "ci95": [
+        0.45546875,
+        0.6808695652173913
+      ],
+      "cost_usd": 15.7836109,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.0013127,
+      "median_seconds": 28.08375675001298,
+      "model": "openai/gpt-5.6-sol-pro",
+      "p95_seconds": 112.58885870792437,
+      "partial_score": 0.6026687598116169,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 15.7836109,
+      "reused_responses": 119,
+      "score": 0.5529411764705882,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.5462184873949579
+    },
+    {
+      "assembled_at": "2026-09-08T20:35:32.323867+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.8571428571428571
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.5777777777777777
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.5
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.5714285714285714
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.4117647058823529
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.5416666666666666
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.5365853658536586
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.4230769230769231
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.5961538461538461
+        }
+      },
+      "ci95": [
+        0.4365079365079365,
+        0.656
+      ],
+      "cost_usd": 2.51974275,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 4,
+      "grader_cost_usd": 0.001233,
+      "median_seconds": 19.305374625022523,
+      "model": "google/gemini-3.8-flash",
+      "p95_seconds": 169.62729624999338,
+      "partial_score": 0.5697186566934467,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 2.51974275,
+      "reused_responses": 119,
+      "score": 0.5378151260504201,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.5378151260504201
+    },
+    {
+      "assembled_at": "2026-09-08T21:34:55.009552+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.6428571428571429
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.4222222222222222
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.2
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.5285714285714286
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.17647058823529413
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.4583333333333333
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.4146341463414634
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.23076923076923078
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.4269230769230769
+        }
+      },
+      "ci95": [
+        0.291304347826087,
+        0.4939393939393939
+      ],
+      "cost_usd": 6.960382,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.0012347,
+      "median_seconds": 138.87392929202178,
+      "model": "x-ai/grok-4.6",
+      "p95_seconds": 375.4239427499997,
+      "partial_score": 0.4246221565549297,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 6.960382,
+      "reused_responses": 119,
+      "score": 0.3798319327731093,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.3697478991596639
+    },
+    {
+      "assembled_at": "2026-09-08T22:37:53.715738+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.5714285714285714
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.4444444444444444
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.2
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.8142857142857143
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.11764705882352941
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.2916666666666667
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.43902439024390244
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.15384615384615385
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.39807692307692305
+        }
+      },
+      "ci95": [
+        0.284070796460177,
+        0.45098039215686275
+      ],
+      "cost_usd": 6.053376,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 24,
+      "grader_cost_usd": 0.0009137,
+      "median_seconds": 175.23985266700038,
+      "model": "qwen/qwen3.8-max-0902",
+      "p95_seconds": 296.7223589589994,
+      "partial_score": 0.3910933604210915,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 6.053376,
+      "reused_responses": 119,
+      "score": 0.3588235294117647,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.35294117647058826
+    },
+    {
+      "assembled_at": "2026-09-09T00:03:58.280932+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.5
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.35555555555555557
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.0
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.2857142857142857
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.058823529411764705
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.2916666666666667
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.2926829268292683
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.11538461538461539
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.3173076923076923
+        }
+      },
+      "ci95": [
+        0.18309859154929578,
+        0.375
+      ],
+      "cost_usd": null,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 52,
+      "grader_cost_usd": 0.0016738999999999999,
+      "median_seconds": 449.57700950000435,
+      "model": "z-ai/glm-5.3-flash",
+      "p95_seconds": 692.2535314589913,
+      "partial_score": 0.2756302521008403,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 0.66449542,
+      "reused_responses": 119,
+      "score": 0.2647058823529412,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600
+      },
+      "strict_score": 0.2605042016806723
+    },
+    {
+      "assembled_at": "2026-09-08T21:35:00.342311+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.5714285714285714
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.26666666666666666
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.1
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.14285714285714285
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.11764705882352941
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.20833333333333334
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.2926829268292683
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.15384615384615385
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.21153846153846154
+        }
+      },
+      "ci95": [
+        0.15328467153284672,
+        0.31683168316831684
+      ],
+      "cost_usd": 0.613848606,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 30,
+      "grader_cost_usd": 0.0013808,
+      "median_seconds": 102.39861812500749,
+      "model": "qwen/qwen3.8-flash",
+      "p95_seconds": 406.2740384169738,
+      "partial_score": 0.2336934773909564,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 0.613848606,
+      "reused_responses": 115,
+      "score": 0.226890756302521,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.226890756302521
+    },
+    {
+      "assembled_at": "2026-09-08T22:55:18.770276+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.5714285714285714
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.1111111111111111
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.3
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.24285714285714285
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.11764705882352941
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.20833333333333334
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.17073170731707318
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.19230769230769232
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.18653846153846151
+        }
+      },
+      "ci95": [
+        0.12396694214876033,
+        0.2406779661016949
+      ],
+      "cost_usd": 7.314113,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 46,
+      "grader_cost_usd": 0.0014099,
+      "median_seconds": 388.08664595897426,
+      "model": "bytedance-seed/seed-2-1-turbo",
+      "p95_seconds": 511.8913834170089,
+      "partial_score": 0.19523809523809524,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 7.314113,
+      "reused_responses": 119,
+      "score": 0.18235294117647058,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.17647058823529413
+    },
+    {
+      "assembled_at": "2026-09-08T21:09:58.147043+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.42857142857142855
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.044444444444444446
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.0
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.14285714285714285
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.11764705882352941
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.125
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.0975609756097561
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.038461538461538464
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.11538461538461539
+        }
+      },
+      "ci95": [
+        0.035398230088495575,
+        0.16101694915254236
+      ],
+      "cost_usd": 2.031369594,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 27,
+      "grader_cost_usd": 0.0012298,
+      "median_seconds": 91.16993604198797,
+      "model": "deepseek/deepseek-v4-flash-vision-exp",
+      "p95_seconds": 273.93790520800394,
+      "partial_score": 0.10624865330747683,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 2.031369594,
+      "reused_responses": 119,
+      "score": 0.09243697478991597,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0.0,
+        "timeout_seconds": 600.0
+      },
+      "strict_score": 0.09243697478991597
+    }
+  ],
+  "release": "September 2026 pilot",
+  "schema_version": 1,
+  "scope": "These results cover the full pilot. A separate public demo and private test set are planned."
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Part Catalog Bench prediction",
+  "type": "object",
+  "required": ["exercise_id", "question_id", "answer"],
+  "properties": {
+    "exercise_id": {"type": "string"},
+    "question_id": {"type": "string"},
+    "answer": {},
+    "raw_response": {"type": ["string", "null"]},
+    "error": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
+

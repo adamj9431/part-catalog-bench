@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example answer — Part Catalog Bench</title>
+  <meta name="description" content="Answers to three example parts-catalog questions, with highlighted evidence in the original Ford suspension diagram.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="answer.js" defer></script>
+</head>
+<body>
+  <main class="wrap answer-page">
+    <a href="./#example">← Back to the examples</a>
+    <div id="answer-content" hidden>
+      <p id="answer-level" class="question-label"></p>
+      <h1 id="answer-title"></h1>
+      <p id="answer-question" class="answer-question"></p>
+      <div class="answer-layout">
+        <div class="answer-figure">
+          <div class="diagram-controls"><label for="diagram-zoom">Diagram size</label><select id="diagram-zoom"><option value="1">Fit to width</option><option value="1.5">150%</option><option value="2">200%</option><option value="3">300%</option></select><button id="toggle-highlights" class="button" aria-pressed="true">Hide highlights</button></div>
+          <div class="diagram-scroll" tabindex="0" aria-label="Highlighted catalog diagram. When enlarged, scroll to see more of the page.">
+            <div id="annotated-diagram" class="annotated-diagram">
+              <img src="assets/falcon-suspension.png" alt="Ford front suspension illustration 30–18. Highlighted regions correspond to the numbered explanation beside the diagram." width="1538" height="1986">
+              <svg id="answer-highlights" viewBox="0 0 1387 1791" aria-hidden="true"></svg>
+              <div id="answer-markers"></div>
+            </div>
+          </div>
+          <p class="caption">Ford Car Master Parts and Accessories Catalog, illustration 30–18, Forel edition. The highlights were added for this explanation; they are not part of the question given to the model.</p>
+        </div>
+        <div class="answer-explanation">
+          <section aria-labelledby="correct-title"><h2 id="correct-title">Correct answer</h2><div id="correct-answer" class="correct-answer"></div></section>
+          <section aria-labelledby="explanation-title"><h2 id="explanation-title">Where to look</h2><div id="answer-steps"></div></section>
+        </div>
+      </div>
+    </div>
+    <p id="answer-error" role="alert" hidden>That example wasn’t found. Please choose one of the three questions on the main page.</p>
+    <noscript><p>Enable JavaScript to view the annotated answer, or return to the examples.</p></noscript>
+  </main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# Licensed source documents and all derived catalog assets stay local.
+catalog_sources/
+catalog/
+1960-68 Ford Master Parts Catalog.pdf
+
+# Benchmark outputs can contain paid model responses and usage data.
+results/
+!results/.gitkeep
+
+# Authoring-studio archives are local recovery copies.
+data/exercises/.trash/
+
+# Private laptop-transfer packages contain unpublished data and licensed PDFs.
+transfer/

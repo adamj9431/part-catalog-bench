@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use Part Catalog Bench, please cite it and identify the benchmark version or commit and results snapshot you used."
+type: software
+title: "Part Catalog Bench"
+repository-code: "https://github.com/adamj9431/part-catalog-bench"
+authors:
+  - family-names: Johnson
+    given-names: Adam
+    email: adamj9431@gmail.com
+abstract: "A benchmark for evaluating AI understanding of automotive parts diagrams."
+keywords:
+  - benchmark
+  - automotive parts diagrams
+  - vision-language models
+# Add the release version/date and DOI when available.

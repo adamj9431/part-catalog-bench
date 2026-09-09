@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Part Catalog Bench exercise",
+  "type": "object",
+  "required": ["id", "status", "title", "source_id", "context", "questions"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1, "default": 1},
+    "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"},
+    "status": {"enum": ["draft", "ready"]},
+    "title": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "context": {
+      "type": "object",
+      "properties": {
+        "catalog_refs": {"type": "array", "items": {"type": "string"}},
+        "pages": {"type": "array", "items": {"$ref": "#/$defs/contextPage"}},
+        "assets": {"type": "array", "items": {"type": "string"}},
+        "annotations": {"type": "array", "items": {"$ref": "#/$defs/annotation"}},
+        "note": {"type": ["string", "null"]}
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "prompt", "category", "difficulty", "answer"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"},
+          "prompt": {"type": "string", "minLength": 3},
+          "category": {
+            "enum": [
+              "component_identification",
+              "spatial_relationship",
+              "catalog_notation",
+              "routed_system_tracing",
+              "cross_view_matching",
+              "assembly_stack_tracing",
+              "quantity_reasoning",
+              "functional_reasoning"
+            ]
+          },
+          "difficulty": {"enum": ["easy", "medium", "hard"]},
+          "difficulty_note": {"type": ["string", "null"]},
+          "annotations": {"type": "array", "items": {"$ref": "#/$defs/annotation"}},
+          "answer": {"$ref": "#/$defs/answer"},
+          "evidence": {"type": "object"},
+          "weight": {"type": "number", "exclusiveMinimum": 0, "default": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "rect": {
+      "type": "object",
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {"type": "number", "minimum": 0, "maximum": 1},
+        "y": {"type": "number", "minimum": 0, "maximum": 1},
+        "width": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "height": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "point": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": {"type": "number", "minimum": 0, "maximum": 1},
+        "y": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "contextPage": {
+      "type": "object",
+      "required": ["ref"],
+      "properties": {
+        "ref": {"type": "string", "minLength": 3},
+        "crop": {"oneOf": [{"$ref": "#/$defs/rect"}, {"type": "null"}]},
+        "note": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "required": ["id", "label", "page_ref"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"},
+        "label": {"type": "string", "minLength": 1, "maxLength": 12},
+        "page_ref": {"type": "string", "minLength": 3},
+        "rect": {"$ref": "#/$defs/rect"},
+        "polygon": {"type": "array", "minItems": 3, "items": {"$ref": "#/$defs/point"}},
+        "description": {"type": ["string", "null"]},
+        "color": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "default": "#ffcc00"}
+      },
+      "oneOf": [
+        {"required": ["rect"]},
+        {"required": ["polygon"]}
+      ],
+      "additionalProperties": false
+    },
+    "answer": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["part_number", "integer", "date", "boolean", "ordered_list", "ordered_part_path", "unordered_set", "short_text", "compound"]},
+        "value": {},
+        "aliases": {"type": "array"},
+        "family": {"enum": ["basic", "service", "engineering", "standard", "auto"]},
+        "item_type": {"type": ["string", "null"]},
+        "item_family": {"enum": ["basic", "service", "engineering", "standard", "auto"]},
+        "fields": {"type": "object", "additionalProperties": {"$ref": "#/$defs/answer"}},
+        "grading": {"$ref": "#/$defs/rubricGrading"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"const": "ordered_part_path"}}, "required": ["type"]},
+          "then": {
+            "required": ["value"],
+            "properties": {
+              "value": {
+                "type": "array",
+                "minItems": 1,
+                "items": {"$ref": "#/$defs/partPathStep"}
+              }
+            }
+          }
+        }
+      ]
+    },
+    "rubricGrading": {
+      "type": "object",
+      "required": ["method", "criteria"],
+      "properties": {
+        "method": {"const": "rubric"},
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/rubricCriterion"}
+        },
+        "calibration_cases": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/rubricCalibrationCase"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "rubricCriterion": {
+      "type": "object",
+      "required": ["id", "description", "points"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"},
+        "description": {"type": "string", "minLength": 3},
+        "points": {"type": "number", "exclusiveMinimum": 0},
+        "required": {"type": "boolean", "default": true},
+        "grader": {"$ref": "#/$defs/rubricCriterionGrader"}
+      },
+      "additionalProperties": false
+    },
+    "rubricCriterionGrader": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["semantic", "contains_part_number"]},
+        "value": {"type": ["string", "null"]},
+        "family": {"enum": ["basic", "service", "engineering", "standard", "auto"]}
+      },
+      "additionalProperties": false
+    },
+    "rubricCalibrationCase": {
+      "type": "object",
+      "required": ["response", "expected_score"],
+      "properties": {
+        "response": {"type": "string", "minLength": 1},
+        "expected_score": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "additionalProperties": false
+    },
+    "partPathStep": {
+      "type": "object",
+      "required": ["part_number", "instance", "pass"],
+      "properties": {
+        "part_number": {"type": "string", "minLength": 1},
+        "instance": {"type": "integer", "minimum": 1},
+        "pass": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,22 @@
+id: ford-car-master-1960-68
+title: 1960-68 Ford Car Master Parts and Accessories Catalog
+publisher: Forel Publishing Company, LLC
+product_id: D10063
+acquisition_url: https://www.forelpublishing.com/clickbank/index.html
+expected:
+  pages: 5445
+  title_contains: 1960-68 Ford Car Master Parts
+catalog_roots:
+  text:
+    title_contains: "(Text)"
+  illustrations:
+    title_contains: "(Illustrations)"
+logical_page_rules:
+  - catalog: illustrations
+    bookmark_regex: '^Illustrations Section (?P<section>[A-Za-z]?\d+(?:\.\d+)?)'
+    format: 'illustrations:{section}-{page}'
+  - catalog: text
+    bookmark_regex: '^Section (?P<section>[A-Za-z]?\d+(?:\.\d+)?)$'
+    format: 'text:{section}-{page}'
+guide: prompts/sources/ford-car-master-1960-68.md
+

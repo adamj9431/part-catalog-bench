@@ -1,0 +1,5 @@
+schema_version: 1
+id: public-demo
+description: One approved illustration with three public example questions; not the full pilot.
+exercise_ids:
+  - ford-illustration-030-018-1967-falcon-suspension

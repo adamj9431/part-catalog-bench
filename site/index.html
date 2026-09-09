@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Part Catalog Bench measures how AI models interpret automotive parts illustrations. Compare accuracy, cost, reliability, and reasoning skills.">
+  <meta name="color-scheme" content="light">
+  <title>Part Catalog Bench — Results</title>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Part Catalog Bench">
+  <meta property="og:title" content="Part Catalog Bench — AI diagram understanding">
+  <meta property="og:description" content="How well can AI read automotive parts diagrams? Compare benchmark scores and costs.">
+  <meta property="og:url" content="https://adamj9431.github.io/part-catalog-bench/">
+  <meta property="og:image" content="https://adamj9431.github.io/part-catalog-bench/data/pareto-preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pareto chart comparing model scores and evaluation costs on Part Catalog Bench, with 95% confidence intervals.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Part Catalog Bench — AI diagram understanding">
+  <meta name="twitter:description" content="Compare AI performance on automotive parts diagrams.">
+  <meta name="twitter:image" content="https://adamj9431.github.io/part-catalog-bench/data/pareto-preview.png">
+  <meta name="twitter:image:alt" content="Pareto chart comparing benchmark scores and costs, with 95% confidence intervals.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#results">Skip to results</a>
+  <main class="wrap">
+    <section id="about" class="intro" aria-labelledby="title">
+      <div><h1 id="title">Part Catalog Bench</h1>
+      <p class="intro-subtitle">Can AI read an automotive parts diagram?</p>
+      <p class="lede">I bought a 1966 Ford Thunderbird about a year ago, and I do most of the work on it myself. While working on the car, I often gave AI tools the manuals and parts catalogs and asked questions. They frequently had trouble understanding the diagrams.</p>
+      <p class="lede">I built this benchmark to find out what they could and couldn’t do, and to track whether they get better over time.</p>
+      <div class="release-stamp"><span class="status-dot"></span><span id="release">Pilot evaluation</span><small id="exported">Loading results…</small></div>
+      </div>
+    </section>
+    <div id="load-error" class="error" role="alert" hidden></div>
+    <noscript><p class="error">Enable JavaScript to explore the results, or <a href="data/results.csv">download the aggregate CSV</a>.</p></noscript>
+    <section class="stats" aria-label="Evaluation overview">
+      <div><span id="n-questions">—</span><p>questions</p></div>
+      <div><span id="n-exercises">—</span><p>exercises</p></div>
+      <div><span id="best-score">—</span><p>highest score so far</p></div>
+      <div><span id="n-models">—</span><p>completed models</p></div>
+    </section>
+    <section id="example" class="panel example" aria-labelledby="example-title">
+      <div class="section-top"><h2 id="example-title">Example questions from the benchmark</h2></div>
+      <p class="example-intro">This is the front suspension diagram for the 1966–67 Falcon and Fairlane, with variations for the 1967 Mustang. One exercise contains several questions about the same page. Here are three from this exercise, exactly as written in the benchmark.</p>
+      <div class="example-grid">
+        <figure>
+          <a href="assets/falcon-suspension.png" target="_blank" rel="noopener"><img src="assets/falcon-suspension.png" alt="Ford illustration 30–18: an exploded front suspension diagram with part-number labels, hardware changes, and separate Mustang details. Open the full-size image to read the labels." width="1538" height="1986"></a>
+          <figcaption>Ford Car Master Parts and Accessories Catalog, illustration 30–18. Reproduced from the Forel edition. Click the image to open it at full size.</figcaption>
+        </figure>
+        <div class="example-questions">
+          <article><p class="question-label">Easy · Part connections</p><p class="example-question" data-example-question="q06">Bolt 380571-S is used to attach part 3468 to what part?</p><a class="answer-link" href="answer.html?example=attachment">See the correct answer →</a></article>
+          <article><p class="question-label">Medium · Catalog notation</p><p class="example-question" data-example-question="q02">According to the diagram, what change(s) were made to the attachment hardware for part 18A017?</p><a class="answer-link" href="answer.html?example=hardware">See the correct answer →</a></article>
+          <article><p class="question-label">Hard · Assembly order</p><p class="example-question" data-example-question="q01">Part 5495 passes through a series of other parts. List all the part numbers for these parts, in order from top to bottom as installed on the vehicle. Do not include 5495 itself.</p><a class="answer-link" href="answer.html?example=assembly">See the correct answer →</a></article>
+          <p class="example-note">Each model gets the image and one question at a time, along with instructions for reading the catalog and formatting its answer. It doesn’t see the other questions or their answers.</p>
+        </div>
+      </div>
+    </section>
+    <section id="results" class="panel" aria-labelledby="results-title">
+      <div class="section-top"><div><h2 id="results-title">Results</h2></div><div class="downloads"><a class="button" href="data/results.csv" download>CSV ↓</a><a class="button" href="data/results.json" download>JSON ↓</a></div></div>
+      <p class="caption table-help">GPT-6 Astra does extremely well on this benchmark, scoring 87.4%—well ahead of the other completed models. Claude Fable 5.1 is next at 61.3%.</p>
+      <div class="table-scroll"><table><caption class="sr-only">Model performance, cost, and reliability</caption><thead><tr>
+        <th scope="col" aria-sort="none"><button data-sort="model">Model ↕</button></th>
+        <th scope="col" aria-sort="descending"><button data-sort="score">Score ↓</button></th>
+        <th scope="col">95% CI</th>
+        <th scope="col" aria-sort="none"><button data-sort="cost_usd">Cost ↕</button></th>
+        <th scope="col" aria-sort="none"><button data-sort="median_seconds">Median time ↕</button></th>
+        <th scope="col" aria-sort="none"><button data-sort="failed_responses">Failures ↕</button></th>
+      </tr></thead><tbody id="leaderboard"></tbody></table></div>
+    </section>
+    <section class="panel chart-panel" aria-labelledby="chart-title">
+      <div class="section-top"><div><h2 id="chart-title">Score and cost</h2></div><button id="download-chart" class="button" disabled>Download chart ↓</button></div>
+      <div class="chart-key"><span><i class="key-line"></i> Observed Pareto frontier</span><span><i class="key-ci"></i> 95% confidence interval</span><span class="chart-hint">Higher and further left is better</span></div>
+      <div id="chart" class="chart" aria-live="polite"></div>
+      <p class="caption">Click a model for its breakdown.</p>
+    </section>
+    <section id="model-detail" class="panel detail" aria-labelledby="detail-title" hidden>
+      <div class="section-top"><div><h2 id="detail-title"></h2><p id="model-id" class="caption"></p></div><label class="select-label">Breakdown<select id="breakdown"><option value="by_difficulty">Difficulty</option><option value="by_category">Question category</option></select></label></div>
+      <div class="detail-grid"><div id="bars" aria-live="polite"></div><div class="detail-meta"><dl id="model-metrics"></dl></div></div>
+      <p class="caption">Groups with fewer than five questions aren’t shown. There are too few questions in some categories to draw strong conclusions.</p>
+    </section>
+    <section id="methodology" class="methodology" aria-labelledby="method-title">
+      <div><h2 id="method-title">How the test works</h2><p>So far, all the exercises come from one Ford parts catalog. I wrote the questions and answers myself. There’s plenty more to test; these results only tell us how models did on this set.</p></div>
+      <div class="method-cards">
+        <article><h3>What the model sees</h3><p>A question, the relevant page images, and instructions on how to use the catalog. Images are rendered at 300 DPI, with any crops or highlights specified for that question. The PDF’s OCR text isn’t sent. None of the current questions requires looking something up in the text catalog.</p></article>
+        <article><h3>Scoring</h3><p>Every question has the same weight, regardless of difficulty. Part numbers, lists, and other structured answers are checked against the answer key. Free-text answers are graded against a rubric and can earn partial credit. Partial credit for incomplete lists is reported separately from the main score.</p></article>
+        <article><h3>Run settings</h3><p>These models were accessed through OpenRouter.</p><p id="protocol">Loading run settings…</p><p>Each score uses one answer per question. Some answers are reused from earlier runs when the question, image, and settings match. The assembly date is when those results were combined, not necessarily when every answer was generated.</p></article>
+        <article><h3>Error bars</h3><p>Several questions share each diagram, so the confidence intervals resample whole exercises rather than treating every question as independent. With only ten exercises, the intervals are still wide. They don’t capture how answers might change on a second run, or errors made by the grader.</p></article>
+        <article><h3>Failed answers</h3><p>A model gets zero if it runs out of output tokens or returns no final answer. Service errors can be retried. Models with unfinished runs or unresolved grading errors aren’t listed yet. A service failure doesn’t tell us how the model would have answered.</p></article>
+        <article><h3>Cost and time</h3><p>Cost is what the provider reported for the saved answers, including reused ones. Grading costs are listed separately. Paid retries that weren’t recorded may be missing, so these figures won’t necessarily match the bill. Response times also depend on provider load and how much reasoning the model does.</p></article>
+      </div>
+    </section>
+    <section id="catalog" class="diagrams-section" aria-labelledby="catalog-title">
+      <h2 id="catalog-title">The diagrams</h2>
+      <p>This benchmark uses diagrams from the Ford 1960–68 Car Master Parts and Accessories Catalog, a 5,445-page reference Ford dealerships used to look up parts before computerized parts systems.</p>
+      <p>To run the benchmark yourself, you’ll need your own PDF copy of the catalog. You can <a href="https://www.forelpublishing.com/clickbank/index.html" target="_blank" rel="noopener noreferrer">purchase it from Forel</a> (product D10063).</p>
+    </section>
+    <section id="citation" class="citation-section" aria-labelledby="citation-title">
+      <h2 id="citation-title">Cite this benchmark</h2>
+      <p>Adam Johnson. <a href="https://github.com/adamj9431/part-catalog-bench"><em>Part Catalog Bench.</em></a> 2026.</p>
+      <p>If you use the benchmark or its results, please cite it and include the benchmark version or commit and the results snapshot you used.</p>
+      <details class="citation-details">
+        <summary>BibTeX citation</summary>
+        <pre><code id="citation-bibtex">@misc{johnson2026partcatalogbench,
+  author = {Johnson, Adam},
+  title = {{Part Catalog Bench}},
+  year = {2026},
+  howpublished = {AI benchmark},
+  url = {https://github.com/adamj9431/part-catalog-bench},
+  note = {Pilot benchmark}
+}</code></pre>
+        <div class="citation-actions"><button id="copy-citation" class="button" hidden>Copy BibTeX</button><a class="button" href="citation.bib" download>Download .bib</a><span id="citation-status" role="status"></span></div>
+      </details>
+    </section>
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p>Questions, feedback, or a mistake in the benchmark? Email me at <a href="mailto:adamj9431@gmail.com">adamj9431@gmail.com</a>.</p>
+    </section>
+    <section id="the-car" class="car-section" aria-labelledby="car-title">
+      <h2 id="car-title">The car behind the benchmark</h2>
+      <figure class="owner-photo">
+        <a href="assets/thunderbird-owner.png" target="_blank" rel="noopener"><img src="assets/thunderbird-owner.png" alt="The benchmark’s creator and his son in his red 1966 Ford Thunderbird convertible, parked beside a garage. This photo was edited with AI." width="1448" height="1086" loading="lazy"></a>
+        <figcaption>Me and my son in my 1966 Ford Thunderbird. I used ChatGPT to remove a car and house in the background. The removal of my eyes was unsolicited.</figcaption>
+      </figure>
+    </section>
+    <footer><a href="https://github.com/adamj9431/part-catalog-bench">GitHub</a><a href="data/results.json" download>Download aggregate data</a></footer>
+  </main>
+</body>
+</html>

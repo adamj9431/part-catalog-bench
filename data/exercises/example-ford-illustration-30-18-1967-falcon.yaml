@@ -1,0 +1,124 @@
+schema_version: 1
+id: ford-illustration-030-018-1967-falcon-suspension
+status: ready
+title: 1967 Falcon suspension and shock absorber relationships
+source_id: ford-car-master-1960-68
+context:
+  catalog_refs: []
+  pages:
+  - ref: illustrations:30-18
+  assets: []
+  annotations: []
+questions:
+- id: q01
+  prompt: Part 5495 passes through a series of other parts. List all the part numbers
+    for these parts, in order from top to bottom as installed on the vehicle. Do not
+    include 5495 itself.
+  category: assembly_stack_tracing
+  difficulty: hard
+  difficulty_note: Provisional import rating; author review recommended.
+  annotations: []
+  answer:
+    type: ordered_part_path
+    value:
+    - part_number: 378866-S
+      instance: 1
+      pass: 1
+    - part_number: 371169-S
+      instance: 1
+      pass: 1
+    - part_number: '55490'
+      instance: 1
+      pass: 1
+    - part_number: '5482'
+      instance: 1
+      pass: 1
+    - part_number: '55490'
+      instance: 2
+      pass: 1
+    - part_number: 371169-S
+      instance: 2
+      pass: 1
+    - part_number: '5490'
+      instance: 1
+      pass: 1
+    - part_number: 371169-S
+      instance: 3
+      pass: 1
+    - part_number: '55490'
+      instance: 3
+      pass: 1
+    - part_number: '3397'
+      instance: 1
+      pass: 1
+    - part_number: 5A491
+      instance: 1
+      pass: 1
+    - part_number: '55490'
+      instance: 4
+      pass: 1
+    - part_number: 371169-S
+      instance: 4
+      pass: 1
+    aliases: []
+    family: auto
+    item_family: auto
+    fields: {}
+  evidence:
+    catalog_refs:
+    - illustrations:30-18
+    note: ''
+  weight: 1.0
+- id: q02
+  prompt: According to the diagram, what change(s) were made to the attachment hardware
+    for part 18A017?
+  category: catalog_notation
+  difficulty: medium
+  difficulty_note: ''
+  annotations: []
+  answer:
+    type: short_text
+    value: ''
+    aliases: []
+    family: auto
+    item_family: auto
+    fields: {}
+    grading:
+      method: rubric
+      criteria:
+      - id: criterion-1
+        description: nut 33923-S was replaced by 34392-S
+        points: 0.5
+        required: true
+        grader:
+          type: semantic
+          family: auto
+      - id: criterion-2
+        description: bolt 355471-S was replaced by 378940-S
+        points: 0.5
+        required: true
+        grader:
+          type: semantic
+          family: auto
+      calibration_cases: []
+  evidence:
+    catalog_refs:
+    - illustrations:30-18
+  weight: 1.0
+- id: q06
+  prompt: Bolt 380571-S is used to attach part 3468 to what part?
+  category: spatial_relationship
+  difficulty: easy
+  difficulty_note: ''
+  annotations: []
+  answer:
+    type: part_number
+    value: '3397'
+    aliases: []
+    family: basic
+    item_family: auto
+    fields: {}
+  evidence:
+    catalog_refs: []
+    note: ''
+  weight: 1.0
