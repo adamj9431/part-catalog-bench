@@ -57,6 +57,10 @@ and use a separately versioned dataset and fingerprint.
 - Only the three approved demo questions may appear. Neither full exercises nor
   raw predictions, rubric decisions, snapshots, development logs, or handoff
   documents belong here.
+- The example answer pages may show saved final model answers and scores for
+  those same three approved questions, with reviewed editorial notes. This is
+  an explicit exception to aggregate-only results; provider reasoning and
+  raw provider payloads remain private. See [minisite instructions](minisite.md).
 - Only the selected page 30–18 illustration, owner photo, and aggregate chart
   are included as images. The catalog image remains third-party material; see
   the rights notice. No full catalog PDF belongs in either Git history.

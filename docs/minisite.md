@@ -47,6 +47,25 @@ prompts, expected and predicted answers, rubric details, paths, catalog material
 and provider responses. Category and difficulty groups need at least five
 questions. Review metadata and numeric summaries before public release.
 
+### Model answers for the three public examples
+
+The answer pages also load `site/data/example-results.js`: an explicitly approved
+exception to aggregate-only publication. It contains each model's final answer,
+saved score, completion status, and a short editorial note for only the three
+public questions (q01, q02, and q06 of the Falcon suspension exercise).
+Incomplete responses are shown separately from incorrect completed answers.
+No provider reasoning, raw response payloads, or other question answers are included.
+
+Regenerate this snapshot with `python tools/export_example_results.py --run
+<completed-run-directory> --run <another-completed-run-directory> --site site`,
+passing every run used for the current leaderboard. Private sibling repository
+paths work too. The exporter verifies completed runs and matching models and
+dataset hashes. It does not call a model or change scores. The editorial notes
+are manually reviewed descriptions of the September 2026 answers, not an
+automatic grader: review and update them whenever replacing runs or adding
+models. Regenerate both the aggregate and example snapshots together, then run
+`node --test tests/minisite.test.cjs tests/answers.test.cjs` before publishing.
+
 Assembly dates are not necessarily inference dates. Reused response counts include
 both older runs and the batches assembled into the final run. Cost accounts for
 retained candidate responses and may exclude paid retries that were not recorded.

@@ -181,6 +181,38 @@ const examples = {
   },
 };
 
+function resultEscape(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  })[c]);
+}
+
+function modelAnswerMarkup(answer) {
+  if (Array.isArray(answer)) {
+    return `<p class="caption">In the model’s order. Instance identifies a physical copy; pass counts traversals through that copy.</p><ol class="model-answer-path">${answer.map(p =>
+      `<li><code>${resultEscape(p.part_number)}</code><span>instance ${resultEscape(p.instance)} · pass ${resultEscape(p.pass)}</span></li>`
+    ).join('')}</ol>`;
+  }
+  return `<blockquote class="model-answer-text">${resultEscape(answer)}</blockquote>`;
+}
+
+function renderExampleResults(key) {
+  const records = typeof EXAMPLE_RESULTS !== 'undefined' ? EXAMPLE_RESULTS.examples[key] : null;
+  if (!Array.isArray(records) || !records.length) return;
+  const correct = records.filter(r => r.status === 'correct').length;
+  const partial = records.filter(r => r.status === 'partial').length;
+  const incomplete = records.filter(r => r.status === 'incomplete').length;
+  document.querySelector('#example-model-summary').textContent =
+    `${correct} of ${records.length} models answered fully correctly.` +
+    (partial ? ` ${partial} earned partial credit.` : '') +
+    (incomplete ? ` ${incomplete} returned no complete answer.` : '');
+  const labels = {correct:'Correct', partial:'Partial credit', incorrect:'Incorrect', incomplete:'Incomplete response'};
+  document.querySelector('#example-model-list').innerHTML = records.map(r => {
+    const status = Object.hasOwn(labels, r.status) ? r.status : 'incomplete';
+    return `<article class="example-model-row"><div class="example-model-heading"><h3>${resultEscape(r.name)}</h3><span class="example-result ${status}">${labels[status]} · ${Math.round(r.score*100)}%</span></div><p>${resultEscape(r.note)}</p>${r.answer == null ? '' : `<details class="model-answer"><summary>Model’s answer</summary>${modelAnswerMarkup(r.answer)}</details>`}</article>`;
+  }).join('');
+}
+
 const exampleKey = new URLSearchParams(location.search).get("example");
 const example = Object.hasOwn(examples, exampleKey) ? examples[exampleKey] : null;
 if (!example) {
@@ -204,6 +236,7 @@ if (!example) {
   document.querySelector("#answer-markers").innerHTML = example.regions.map((r,i)=>`<a class="diagram-marker tone-${r.tone || 'default'}" href="#step-${i}" style="left:${r.marker[0]/1387*100}%;top:${r.marker[1]/1791*100}%" aria-label="${r.title}">${r.label}</a>`).join("");
   document.querySelector("#answer-steps").innerHTML = example.regions.map((r,i)=>`<section id="step-${i}" class="answer-step"><h3><span class="step-label tone-${r.tone || 'default'}">${r.label}</span>${r.title}</h3><p>${r.text}</p></section>`).join("");
   document.querySelector("#answer-content").hidden = false;
+  renderExampleResults(exampleKey);
   document.querySelector("#diagram-zoom").addEventListener("change",event=>{
     document.querySelector("#annotated-diagram").style.width=`${Number(event.target.value)*100}%`;
   });

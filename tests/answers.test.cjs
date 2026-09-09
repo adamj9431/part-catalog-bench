@@ -12,6 +12,7 @@ function page(example) {
   };
   const context=vm.createContext({URLSearchParams,location:{search:`?example=${example}`},
     document:{querySelector:get}});
+  vm.runInContext(fs.readFileSync('site/data/example-results.js','utf8'),context);
   vm.runInContext(fs.readFileSync('site/answer.js','utf8'),context);
   return {get,context};
 }
@@ -82,4 +83,47 @@ test('other examples use matching colors, individual part outlines and an unscor
   assert.equal(vm.runInContext('example.parts.join(",")',context),'378866-S,371169-S,55490,5482,55490,371169-S,5490,371169-S,55490,3397,5A491,55490,371169-S');
   assert.ok(get('#correct-answer').innerHTML.includes('lower control arm'));
   assert.ok(get('#answer-highlights').innerHTML.includes('assembly-guide'));
+});
+
+test('each approved example shows all ten models with saved result distinctions',()=>{
+  for (const key of ['attachment','hardware','assembly']) {
+    const {get,context}=page(key);
+    const data=vm.runInContext('EXAMPLE_RESULTS',context);
+    assert.deepEqual(Object.keys(data.examples).sort(),['assembly','attachment','hardware']);
+    const records=data.examples[key];
+    assert.equal(records.length,10);
+    assert.equal(new Set(records.map(r=>r.model)).size,10);
+    const html=get('#example-model-list').innerHTML;
+    assert.equal((html.match(/class="example-model-row"/g)||[]).length,10);
+    assert.ok(html.includes('GPT-6 Astra'));
+    assert.ok(html.includes('Incomplete response · 0%'));
+    assert.ok(!/provider_response|raw_response|reasoning_tokens|exercise_id/.test(html));
+    for(const r of records) {
+      assert.deepEqual(Object.keys(r).sort(),['answer','model','name','note','score','status']);
+      if(r.status==='incomplete') assert.equal(r.answer,null);
+    }
+  }
+  assert.match(page('hardware').get('#example-model-summary').textContent,/3 of 10.*3 earned partial credit/);
+  assert.match(page('assembly').get('#example-model-summary').textContent,/1 of 10.*3 returned no complete answer/);
+  assert.match(page('attachment').get('#example-model-summary').textContent,/1 of 10.*3 returned no complete answer/);
+});
+
+test('example response snapshots match leaderboard models and dataset',()=>{
+  const {context}=page('hardware');
+  const data=vm.runInContext('EXAMPLE_RESULTS',context);
+  const leaderboard=JSON.parse(fs.readFileSync('site/data/results.json','utf8'));
+  assert.equal(data.release,leaderboard.release);
+  for(const rows of Object.values(data.examples)) {
+    assert.equal(rows.map(r=>r.model).join('|'),leaderboard.models.map(r=>r.model).join('|'));
+  }
+  assert.ok(leaderboard.models.every(r=>r.dataset_sha256===data.dataset_sha256));
+});
+
+test('model answers escape HTML and preserve ordered instance/pass identity',()=>{
+  const {context}=page('assembly');
+  const html=vm.runInContext(`modelAnswerMarkup('<img src=x onerror=alert(1)>')`,context);
+  assert.ok(!html.includes('<img'));
+  assert.ok(html.includes('&lt;img'));
+  const path=vm.runInContext(`modelAnswerMarkup([{part_number:'371169-S',instance:4,pass:2}])`,context);
+  assert.ok(path.includes('instance 4 · pass 2'));
 });

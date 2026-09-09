@@ -295,8 +295,9 @@ results/<run-id>/
 ## Repository layout
 
 The static results minisite lives in `site/`. `part-catalog-bench export-site`
-creates its aggregate-only data from completed, scored runs without exposing
-private questions, answers, or catalog assets. See [minisite instructions](docs/minisite.md)
+creates its aggregate-only leaderboard data from completed, scored runs without exposing
+private questions, answers, or catalog assets. A separate reviewed export shows model
+answers only for the three approved public examples. See [minisite instructions](docs/minisite.md)
 for previewing, refreshing, and publishing it to GitHub Pages.
 
 ```text
