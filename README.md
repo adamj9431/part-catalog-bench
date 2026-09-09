@@ -1,5 +1,7 @@
 # Part Catalog Bench
 
+[View the results, example questions, and model comparisons →](https://adamj9431.github.io/part-catalog-bench/)
+
 Part Catalog Bench evaluates how well multimodal AI systems read illustrated
 parts catalogs: callouts, exploded views, assembly order, attachment
 relationships, quantities, symbols, applicability tables, and full part-number
