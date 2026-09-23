@@ -2,6 +2,9 @@
 const $ = (selector) => document.querySelector(selector);
 const labels = {
   "openai/gpt-6-astra": "GPT-6 Astra",
+  "openai/gpt-6-luna": "GPT-6 Luna",
+  "openai/gpt-6-sol": "GPT-6 Sol",
+  "anthropic/claude-opus-5.5": "Claude Opus 5.5",
   "anthropic/claude-fable-5.1": "Claude Fable 5.1",
   "openai/gpt-5.6-sol-pro": "GPT-5.6 Sol Pro",
   "google/gemini-3.8-flash": "Gemini 3.8 Flash",
@@ -25,6 +28,8 @@ const money = (v) => v == null ? "Unreported" : `$${v.toFixed(2)}`;
 const seconds = (v) => v == null ? "—" : `${v.toFixed(1)} s`;
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let data, selected, sortKey = "score", direction = -1;
+const expandedModels = new Set(), breakdowns = new Map();
+const modelIndex = model => data.models.findIndex(r => r.model === model);
 
 function frontier(rows) {
   const eligible = rows.filter(r => r.cost_usd != null && r.cost_usd > 0);
@@ -46,24 +51,30 @@ function sortedRows(rows, key, dir) {
 
 function renderTable() {
   const efficient = new Set(frontier(data.models).map(r => r.model));
-  $("#leaderboard").innerHTML = sortedRows(data.models,sortKey,direction).map(r => `<tr class="${selected === r.model ? "selected" : ""}">
-    <td><button class="model-button" data-model="${esc(r.model)}" aria-pressed="${selected === r.model}">${esc(name(r))}</button>${efficient.has(r.model) ? '<span class="frontier-tag">FRONTIER</span>' : ""}</td>
+  $("#leaderboard").innerHTML = sortedRows(data.models,sortKey,direction).map(r => {
+    const index=modelIndex(r.model), expanded=expandedModels.has(r.model);
+    return `<tr class="${selected === r.model ? "selected" : ""}">
+    <td><button id="model-toggle-${index}" class="model-button" data-model="${esc(r.model)}" aria-expanded="${expanded}" aria-controls="model-detail-${index}"><span class="disclosure" aria-hidden="true">${expanded ? "▾" : "▸"}</span>${esc(name(r))}</button>${efficient.has(r.model) ? '<span class="frontier-tag">FRONTIER</span>' : ""}</td>
     <td class="score">${pct(r.score)}</td><td>${pct(r.ci95[0])}–${pct(r.ci95[1])}</td>
     <td>${money(r.cost_usd)}</td><td>${seconds(r.median_seconds)}</td><td class="${r.failed_responses ? "failure" : ""}">${r.failed_responses}/${r.questions}<small>${pct(r.failed_responses / r.questions)}</small></td>
-  </tr>`).join("");
-  document.querySelectorAll(".model-button").forEach(b => b.addEventListener("click", () => selectModel(b.dataset.model)));
+  </tr><tr class="model-detail-row" ${expanded ? "" : "hidden"}><td colspan="6"><section id="model-detail-${index}" class="inline-detail" aria-labelledby="model-toggle-${index}">${expanded ? detailsMarkup(r) : ""}</section></td></tr>`;
+  }).join("");
+  document.querySelectorAll(".model-button").forEach(b => b.addEventListener("click", () => toggleModel(b.dataset.model)));
+  document.querySelectorAll("[data-breakdown-model]").forEach(control => control.addEventListener("change", () => {
+    const model=control.dataset.breakdownModel;
+    breakdowns.set(model,control.value);
+    $(`#model-bars-${modelIndex(model)}`).innerHTML=barsMarkup(data.models.find(r=>r.model===model),control.value);
+  }));
 }
 
-function renderDetails() {
-  const r = data.models.find(m => m.model === selected);
-  if (!r) return;
-  $("#model-detail").hidden = false;
-  $("#detail-title").textContent = name(r);
-  $("#model-id").textContent = `${r.model} · ${r.provider}`;
-  const key = $("#breakdown").value;
+function barsMarkup(r, key) {
   const groups = Object.entries(r[key]);
   if (key === "by_difficulty") groups.sort((a,b) => ["easy","medium","hard"].indexOf(a[0]) - ["easy","medium","hard"].indexOf(b[0]));
-  $("#bars").innerHTML = groups.length ? groups.map(([label,g]) => `<div class="bar-row"><div class="bar-label"><span>${esc(categoryLabels[label] || label)}<small>n = ${g.questions}</small></span><strong>${pct(g.score)}</strong></div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(0,Math.min(100,g.score*100))}%"></div></div></div>`).join("") : '<p class="caption">No breakdowns meet the minimum group size.</p>';
+  return groups.length ? groups.map(([label,g]) => `<div class="bar-row"><div class="bar-label"><span>${esc(categoryLabels[label] || label)}<small>n = ${g.questions}</small></span><strong>${pct(g.score)}</strong></div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(0,Math.min(100,g.score*100))}%"></div></div></div>`).join("") : '<p class="caption">No breakdowns meet the minimum group size.</p>';
+}
+
+function detailsMarkup(r) {
+  const index=modelIndex(r.model), key=breakdowns.get(r.model) || "by_difficulty";
   const metrics = [
     ["Overall score", pct(r.score)], ["Fully correct answers", pct(r.strict_score)],
     ["Score with list partial credit",pct(r.partial_score)], ["Model cost",money(r.cost_usd)],
@@ -74,7 +85,9 @@ function renderDetails() {
     ["Reasoning effort",r.settings.reasoning_effort || "Provider default"],
     ["Maximum output tokens",r.settings.max_tokens.toLocaleString()],
   ];
-  $("#model-metrics").innerHTML = metrics.map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+  return `<div class="section-top"><p class="inline-model-id">${esc(r.model)} · ${esc(r.provider)}</p><label class="select-label">Breakdown<select aria-label="Breakdown for ${esc(name(r))}" data-breakdown-model="${esc(r.model)}"><option value="by_difficulty" ${key==="by_difficulty"?"selected":""}>Difficulty</option><option value="by_category" ${key==="by_category"?"selected":""}>Question category</option></select></label></div>
+    <div class="detail-grid"><div id="model-bars-${index}" aria-live="polite">${barsMarkup(r,key)}</div><div class="detail-meta"><dl>${metrics.map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div></div>
+    <p class="caption">Groups with fewer than five questions aren’t shown. There are too few questions in some categories to draw strong conclusions.</p>`;
 }
 
 function chartMarkup(rows, compact = false) {
@@ -117,12 +130,46 @@ function chartMarkup(rows, compact = false) {
 function renderChart() {
   $("#chart").innerHTML = chartMarkup(data.models,window.innerWidth<600);
   document.querySelectorAll("[data-point]").forEach(g => {
-    const activate = () => selectModel(g.dataset.point);
-    g.addEventListener("click",activate);
+    const activate = () => selectModel(g.dataset.point, true);
+    g.addEventListener("click",event=>{
+      // Large hit targets can overlap nearby models. A click on a dot should
+      // choose the nearest dot, not whichever SVG group was painted last.
+      const nearest=[...document.querySelectorAll("[data-point]")].map(point=>{
+          const box=point.querySelector("circle").getBoundingClientRect();
+          return {model:point.dataset.point,distance:Math.hypot(event.clientX-box.x-box.width/2,event.clientY-box.y-box.height/2)};
+      }).sort((a,b)=>a.distance-b.distance)[0];
+      if (nearest.distance <= 15 || event.target.tagName.toLowerCase() === "circle") {
+        selectModel(nearest.model,true);
+      } else activate();
+    });
     g.addEventListener("keydown",e=>{if(e.key==="Enter" || e.key===" "){e.preventDefault();activate();}});
   });
 }
-function selectModel(model) { selected=model;renderTable();renderDetails();renderChart(); }
+function selectModel(model, jumpToDetails = false) {
+  selected=model;expandedModels.add(model);renderTable();renderChart();
+  if (jumpToDetails) {
+    const detail = $(`#model-toggle-${modelIndex(model)}`);
+    detail.focus({preventScroll:true});
+    detail.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",block:"start"});
+  }
+}
+function toggleModel(model) {
+  if (expandedModels.has(model)) expandedModels.delete(model);
+  else expandedModels.add(model);
+  selected=model;renderTable();renderChart();
+  $(`#model-toggle-${modelIndex(model)}`).focus({preventScroll:true});
+}
+function openModelLink(hash = window.location.hash) {
+  if (!data || !hash.startsWith("#model=")) return;
+  let model;
+  try { model=decodeURIComponent(hash.slice(7)); } catch { return; }
+  if (data.models.some(r=>r.model===model)) selectModel(model,true);
+}
+window.addEventListener("hashchange",()=>openModelLink());
+document.querySelectorAll('a[href^="#model="]').forEach(link=>link.addEventListener("click",event=>{
+  // Clicking the same link again must reopen a row the reader has collapsed.
+  if (link.hash===window.location.hash) { event.preventDefault();openModelLink(link.hash); }
+}));
 
 async function start() {
   try {
@@ -130,16 +177,12 @@ async function start() {
     if(!response.ok) throw Error(`Results could not be loaded (${response.status}).`);
     data=await response.json();
     if(data.schema_version!==1 || !Array.isArray(data.models)) throw Error("Unsupported results format.");
-    $("#release").textContent=data.release;
-    $("#exported").textContent=`Updated ${new Date(data.exported_at).toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",timeZoneName:"short"})}`;
-    $("#n-models").textContent=data.models.length;
+    $("#exported").textContent=`Updated ${new Date(data.exported_at).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}).replace(/^Sep /,"Sept ")}`;
     if(!data.models.length){$("#chart").textContent="No completed evaluations are available yet.";return;}
     const first=data.models[0], settings=first.settings;
-    $("#n-questions").textContent=first.questions;
-    $("#n-exercises").textContent=first.exercises;
-    $("#best-score").textContent=pct(Math.max(...data.models.map(r=>r.score)));
     $("#protocol").textContent=`The output limit is ${settings.max_tokens.toLocaleString()} tokens, with ${settings.reasoning_effort || "the provider’s default"} reasoning and temperature set to ${settings.temperature ?? "the default"}. Requests have a ${settings.timeout_seconds}-second timeout and up to ${settings.retries} retries. Free-text answers use ${settings.grader_model} as the grader, with a ${settings.grader_max_tokens}-token output limit.`;
-    selectModel(first.model);
+    renderTable();renderChart();
+    openModelLink();
     $("#download-chart").disabled=false;
   } catch(error) {
     $("#load-error").hidden=false;
@@ -156,7 +199,6 @@ document.querySelectorAll("[data-sort]").forEach(button=>button.addEventListener
   });
   if(data) renderTable();
 }));
-$("#breakdown").addEventListener("change",()=>{if(data)renderDetails();});
 $("#download-chart").addEventListener("click",()=>{
   const blob=new Blob([chartMarkup(data.models)],{type:"image/svg+xml;charset=utf-8"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="part-catalog-bench-pareto.svg";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);

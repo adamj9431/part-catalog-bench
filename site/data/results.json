@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-09-09T00:05:10.363568+00:00",
+  "exported_at": "2026-09-23T20:14:05.607835+00:00",
   "models": [
     {
       "assembled_at": "2026-09-08T19:41:48.546364+00:00",
@@ -81,6 +81,85 @@
       "strict_score": 0.8739495798319328
     },
     {
+      "assembled_at": "2026-09-23T18:49:28.149764+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.3333333333333333
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.8571428571428571
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.8666666666666667
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.7
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 1.0
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.6470588235294118
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.6666666666666666
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.8536585365853658
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.6153846153846154
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.75
+        }
+      },
+      "ci95": [
+        0.6713286713286714,
+        0.8524590163934426
+      ],
+      "cost_usd": 4.389308,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.0014668,
+      "median_seconds": 10.901300459052436,
+      "model": "anthropic/claude-opus-5.5",
+      "p95_seconds": 26.590632917010225,
+      "partial_score": 0.7979330193615908,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 4.389308,
+      "reused_responses": 0,
+      "score": 0.7563025210084033,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0,
+        "timeout_seconds": 600
+      },
+      "strict_score": 0.7563025210084033
+    },
+    {
       "assembled_at": "2026-09-08T20:15:10.952261+00:00",
       "by_category": {
         "assembly_stack_tracing": {
@@ -158,6 +237,85 @@
         "timeout_seconds": 600.0
       },
       "strict_score": 0.6134453781512605
+    },
+    {
+      "assembled_at": "2026-09-23T18:49:28.141964+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.16666666666666666
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.7142857142857143
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.6
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.6
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.7142857142857143
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.35294117647058826
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.5833333333333334
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.5853658536585366
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.38461538461538464
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.6153846153846154
+        }
+      },
+      "ci95": [
+        0.45081967213114754,
+        0.6774193548387096
+      ],
+      "cost_usd": 4.034844,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.0012027,
+      "median_seconds": 15.859015666996129,
+      "model": "openai/gpt-6-sol",
+      "p95_seconds": 43.20681158301886,
+      "partial_score": 0.5865669344660942,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 4.034844,
+      "reused_responses": 0,
+      "score": 0.5546218487394958,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0,
+        "timeout_seconds": 600
+      },
+      "strict_score": 0.5546218487394958
     },
     {
       "assembled_at": "2026-09-08T20:18:01.885965+00:00",
@@ -632,6 +790,85 @@
         "timeout_seconds": 600.0
       },
       "strict_score": 0.226890756302521
+    },
+    {
+      "assembled_at": "2026-09-23T18:49:28.135576+00:00",
+      "by_category": {
+        "assembly_stack_tracing": {
+          "questions": 6,
+          "score": 0.0
+        },
+        "catalog_notation": {
+          "questions": 7,
+          "score": 0.5714285714285714
+        },
+        "component_identification": {
+          "questions": 45,
+          "score": 0.2
+        },
+        "cross_view_matching": {
+          "questions": 10,
+          "score": 0.1
+        },
+        "functional_reasoning": {
+          "questions": 7,
+          "score": 0.42857142857142855
+        },
+        "routed_system_tracing": {
+          "questions": 17,
+          "score": 0.058823529411764705
+        },
+        "spatial_relationship": {
+          "questions": 24,
+          "score": 0.25
+        }
+      },
+      "by_difficulty": {
+        "easy": {
+          "questions": 41,
+          "score": 0.2682926829268293
+        },
+        "hard": {
+          "questions": 26,
+          "score": 0.11538461538461539
+        },
+        "medium": {
+          "questions": 52,
+          "score": 0.21153846153846154
+        }
+      },
+      "ci95": [
+        0.15254237288135594,
+        0.28225806451612906
+      ],
+      "cost_usd": 0.2711752,
+      "dataset_sha256": "b841b82c169c0721b97dd254c992072b0ccc1c8e11d74ce61fc7a9c7aedce363",
+      "exercises": 10,
+      "failed_responses": 0,
+      "grader_cost_usd": 0.0011762,
+      "median_seconds": 26.612611915916204,
+      "model": "openai/gpt-6-luna",
+      "p95_seconds": 53.7475849580951,
+      "partial_score": 0.2207282913165266,
+      "provider": "openrouter",
+      "questions": 119,
+      "reported_cost_usd": 0.2711752,
+      "reused_responses": 0,
+      "score": 0.21008403361344538,
+      "settings": {
+        "dpi": 300,
+        "evaluation_mode": "isolated-question",
+        "grader_max_tokens": 512,
+        "grader_model": "google/gemini-3.5-flash-lite",
+        "grader_reasoning_effort": null,
+        "input_modality": "image-native",
+        "max_tokens": 32768,
+        "reasoning_effort": null,
+        "retries": 2,
+        "temperature": 0,
+        "timeout_seconds": 600
+      },
+      "strict_score": 0.21008403361344538
     },
     {
       "assembled_at": "2026-09-08T22:55:18.770276+00:00",

@@ -85,17 +85,18 @@ test('other examples use matching colors, individual part outlines and an unscor
   assert.ok(get('#answer-highlights').innerHTML.includes('assembly-guide'));
 });
 
-test('each approved example shows all ten models with saved result distinctions',()=>{
+test('each approved example shows all thirteen models with saved result distinctions',()=>{
   for (const key of ['attachment','hardware','assembly']) {
     const {get,context}=page(key);
     const data=vm.runInContext('EXAMPLE_RESULTS',context);
     assert.deepEqual(Object.keys(data.examples).sort(),['assembly','attachment','hardware']);
     const records=data.examples[key];
-    assert.equal(records.length,10);
-    assert.equal(new Set(records.map(r=>r.model)).size,10);
+    assert.equal(records.length,13);
+    assert.equal(new Set(records.map(r=>r.model)).size,13);
     const html=get('#example-model-list').innerHTML;
-    assert.equal((html.match(/class="example-model-row"/g)||[]).length,10);
+    assert.equal((html.match(/class="example-model-row"/g)||[]).length,13);
     assert.ok(html.includes('GPT-6 Astra'));
+    for (const name of ['Claude Opus 5.5','GPT-6 Sol','GPT-6 Luna']) assert.ok(html.includes(name));
     assert.ok(html.includes('Incomplete response · 0%'));
     assert.ok(!/provider_response|raw_response|reasoning_tokens|exercise_id/.test(html));
     for(const r of records) {
@@ -103,9 +104,9 @@ test('each approved example shows all ten models with saved result distinctions'
       if(r.status==='incomplete') assert.equal(r.answer,null);
     }
   }
-  assert.match(page('hardware').get('#example-model-summary').textContent,/3 of 10.*3 earned partial credit/);
-  assert.match(page('assembly').get('#example-model-summary').textContent,/1 of 10.*3 returned no complete answer/);
-  assert.match(page('attachment').get('#example-model-summary').textContent,/1 of 10.*3 returned no complete answer/);
+  assert.match(page('hardware').get('#example-model-summary').textContent,/5 of 13.*3 earned partial credit/);
+  assert.match(page('assembly').get('#example-model-summary').textContent,/1 of 13.*3 returned no complete answer/);
+  assert.match(page('attachment').get('#example-model-summary').textContent,/1 of 13.*3 returned no complete answer/);
 });
 
 test('example response snapshots match leaderboard models and dataset',()=>{

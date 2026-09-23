@@ -13,6 +13,9 @@ EXERCISE = "ford-illustration-030-018-1967-falcon-suspension"
 QUESTIONS = {"attachment": "q06", "hardware": "q02", "assembly": "q01"}
 NAMES = {
     "openai/gpt-6-astra": "GPT-6 Astra",
+    "openai/gpt-6-luna": "GPT-6 Luna",
+    "openai/gpt-6-sol": "GPT-6 Sol",
+    "anthropic/claude-opus-5.5": "Claude Opus 5.5",
     "anthropic/claude-fable-5.1": "Claude Fable 5.1",
     "openai/gpt-5.6-sol-pro": "GPT-5.6 Sol Pro",
     "google/gemini-3.8-flash": "Gemini 3.8 Flash",
@@ -25,6 +28,17 @@ NAMES = {
 }
 # Editorial notes describe observed final answers, not inferred internal reasoning.
 ASSEMBLY_NOTES = {
+    "anthropic/claude-opus-5.5": (
+        "Listed 12 of the 13 parts in order, but omitted 3397 (lower control arm) "
+        "between the third bushing and 5A491. The complete ordered list is required for credit."
+    ),
+    "openai/gpt-6-sol": (
+        "Listed only four parts, starting at the lower control arm. Omitted the upper "
+        "portion of the stack and gave 37169-S instead of 371169-S for the final washer."
+    ),
+    "openai/gpt-6-luna": (
+        "Said the illustration was not clear enough to identify the parts, and did not provide a list."
+    ),
     "openai/gpt-6-astra": (
         "Listed all 13 parts in order, including the separate copies of the washers and bushings."
     ),
@@ -53,6 +67,9 @@ ASSEMBLY_NOTES = {
     ),
 }
 HARDWARE_NOTES = {
+    "anthropic/claude-opus-5.5": "Identified both replacements correctly, including the changeover date.",
+    "openai/gpt-6-sol": "Identified both replacements correctly, including the changeover date.",
+    "openai/gpt-6-luna": "Said the diagram shows no hardware changes, missing both the nut and bolt replacements.",
     "openai/gpt-6-astra": "Identified both the nut replacement and the bolt replacement correctly.",
     "anthropic/claude-fable-5.1": (
         "Identified both replacements correctly, including the changeover date."

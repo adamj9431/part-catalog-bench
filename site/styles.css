@@ -26,6 +26,7 @@
 .intro .release-stamp{border:0;padding:0;max-width:none;margin-top:22px}
 .intro .release-stamp small{display:inline;margin-left:12px}
 .car-section{padding:32px 0}
+.updates-section{padding:16px 0 28px}.update-entry{margin-top:20px;border-left:2px solid var(--line);padding-left:20px}.update-entry h3{font-size:1rem}.update-entry p{max-width:850px;margin:10px 0 0;color:var(--ink)}
 .diagrams-section,.contact-section,.citation-section{padding:24px 0;margin:16px 0 0}
 .diagrams-section p,.contact-section p,.citation-section p{max-width:800px;margin:16px 0 0}
 .citation-details{max-width:800px;margin-top:16px}
@@ -83,3 +84,24 @@ h1,h2,h3{color:var(--ink)}
 .model-answer-path{padding-left:2rem;font-size:1rem;line-height:1.7}
 .model-answer-path span{margin-left:.75rem;color:var(--muted);font-size:.875rem}
 .model-answer-path code{overflow-wrap:anywhere}
+.disclosure{display:inline-block;width:1.15em;color:var(--muted)}
+.model-detail-row>td{padding:0;text-align:left;white-space:normal;background:#f8faff}
+.inline-detail{padding-bottom:1px;font-family:var(--sans,sans-serif);font-weight:400}
+.inline-detail .section-top{align-items:flex-start}
+.inline-model-id{margin:0;color:var(--muted);font-size:.85rem;overflow-wrap:anywhere}
+.inline-detail .detail-grid{padding-top:16px}
+.model-button{scroll-margin-top:2rem}
+.launch-models{columns:2;max-width:750px;padding-left:20px;margin:12px 0 0}
+.launch-models li{break-inside:avoid;margin-bottom:6px}
+@media(max-width:600px){.launch-models{columns:1}}
+.intro-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:start}
+.intro-copy{min-width:0}
+.intro-update{margin:10px 0 0;color:var(--muted);font-size:.875rem;font-style:italic}
+@media(max-width:700px){.intro-grid{grid-template-columns:1fr;gap:24px}}
+/* Keep the methodology introduction above its responsive explanation grid. */
+.methodology{grid-template-columns:minmax(0,1fr);gap:24px}
+.methodology>div>p{max-width:800px;margin:14px 0 0}
+.method-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 32px;align-items:start}
+.method-cards article{min-width:0;border-top:1px solid var(--line);padding-top:16px;overflow-wrap:anywhere}
+@media(max-width:1100px){.method-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.method-cards{grid-template-columns:minmax(0,1fr)}}

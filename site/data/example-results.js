@@ -13,12 +13,28 @@ const EXAMPLE_RESULTS = {
         "note": "Identified 3397, the lower control arm."
       },
       {
+        "model": "anthropic/claude-opus-5.5",
+        "name": "Claude Opus 5.5",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": "3078",
+        "note": "Answered 3078 instead of 3397 (lower control arm)."
+      },
+      {
         "model": "anthropic/claude-fable-5.1",
         "name": "Claude Fable 5.1",
         "score": 0.0,
         "status": "incorrect",
         "answer": "3078",
         "note": "Answered 3078 instead of 3397 (lower control arm)."
+      },
+      {
+        "model": "openai/gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": "3105-R.H., 3106-L.H.",
+        "note": "Answered 3105-R.H., 3106-L.H. instead of 3397 (lower control arm)."
       },
       {
         "model": "openai/gpt-5.6-sol-pro",
@@ -69,6 +85,14 @@ const EXAMPLE_RESULTS = {
         "note": "Answered 3078 instead of 3397 (lower control arm)."
       },
       {
+        "model": "openai/gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": "3078",
+        "note": "Answered 3078 instead of 3397 (lower control arm)."
+      },
+      {
         "model": "bytedance-seed/seed-2-1-turbo",
         "name": "Seed 2.1 Turbo",
         "score": 0.0,
@@ -95,11 +119,27 @@ const EXAMPLE_RESULTS = {
         "note": "Identified both the nut replacement and the bolt replacement correctly."
       },
       {
+        "model": "anthropic/claude-opus-5.5",
+        "name": "Claude Opus 5.5",
+        "score": 1.0,
+        "status": "correct",
+        "answer": "Effective 3-1-66, both attaching fasteners for the 18A017 bracket changed. The nut 33923-S (M-32), used before 3-1-66, was replaced by 34392-S (M-93) from 3-1-66. The bolt 355471-S (BB-651), used before 3-1-66, was replaced by 378940-S (BB-647-DA) from 3-1-66. The nut change is clearly tied to 18A017; linking the bolt pair to this bracket is my reading of the leader lines.",
+        "note": "Identified both replacements correctly, including the changeover date."
+      },
+      {
         "model": "anthropic/claude-fable-5.1",
         "name": "Claude Fable 5.1",
         "score": 1.0,
         "status": "correct",
         "answer": "The diagram shows a dated hardware change (effective 3-1-66) for the 18A017 shock absorber upper bracket attachment: the nut changed from 33923-S (before 3-1-66) to 34392-S (from 3-1-66), and the bolt changed from 355471-S (before 3-1-66) to 378940-S (from 3-1-66).",
+        "note": "Identified both replacements correctly, including the changeover date."
+      },
+      {
+        "model": "openai/gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "score": 1.0,
+        "status": "correct",
+        "answer": "Effective March 1, 1966, the diagram shows two attachment-hardware changes for 18A017: 33923-S was replaced by 34392-S, and 355471-S was replaced by 378940-S.",
         "note": "Identified both replacements correctly, including the changeover date."
       },
       {
@@ -149,6 +189,14 @@ const EXAMPLE_RESULTS = {
         "status": "incorrect",
         "answer": "The diagram shows a dated change to one of the bolts used to attach part 18A017: the bolt 33923-S (marked \"BEFORE 3-1-66\") was replaced by 34392-S (marked \"FROM 3-1-66\"). The other attachment hardware for 18A017 (34420-S bolt, 18041 washer, and 1-500939 nut) is listed without any date change.",
         "note": "Read the nut numbers but called them bolts, and missed the actual bolt replacement. The saved rubric awarded neither criterion."
+      },
+      {
+        "model": "openai/gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": "The diagram does not state any change to the attachment hardware for part 18A017.",
+        "note": "Said the diagram shows no hardware changes, missing both the nut and bolt replacements."
       },
       {
         "model": "bytedance-seed/seed-2-1-turbo",
@@ -243,6 +291,75 @@ const EXAMPLE_RESULTS = {
         "note": "Listed all 13 parts in order, including the separate copies of the washers and bushings."
       },
       {
+        "model": "anthropic/claude-opus-5.5",
+        "name": "Claude Opus 5.5",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": [
+          {
+            "instance": 1,
+            "part_number": "378866-S",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "371169-S",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "55490",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "5482",
+            "pass": 1
+          },
+          {
+            "instance": 2,
+            "part_number": "55490",
+            "pass": 1
+          },
+          {
+            "instance": 2,
+            "part_number": "371169-S",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "5490",
+            "pass": 1
+          },
+          {
+            "instance": 3,
+            "part_number": "371169-S",
+            "pass": 1
+          },
+          {
+            "instance": 3,
+            "part_number": "55490",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "5A491",
+            "pass": 1
+          },
+          {
+            "instance": 4,
+            "part_number": "55490",
+            "pass": 1
+          },
+          {
+            "instance": 4,
+            "part_number": "371169-S",
+            "pass": 1
+          }
+        ],
+        "note": "Listed 12 of the 13 parts in order, but omitted 3397 (lower control arm) between the third bushing and 5A491. The complete ordered list is required for credit."
+      },
+      {
         "model": "anthropic/claude-fable-5.1",
         "name": "Claude Fable 5.1",
         "score": 0.0,
@@ -275,6 +392,35 @@ const EXAMPLE_RESULTS = {
           }
         ],
         "note": "Listed only five parts. Omitted most of the stack, including 378866-S, 5482 and 3397, and added 3368 and 34447-S."
+      },
+      {
+        "model": "openai/gpt-6-sol",
+        "name": "GPT-6 Sol",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": [
+          {
+            "instance": 1,
+            "part_number": "3397",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "5A491",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "55490",
+            "pass": 1
+          },
+          {
+            "instance": 1,
+            "part_number": "37169-S",
+            "pass": 1
+          }
+        ],
+        "note": "Listed only four parts, starting at the lower control arm. Omitted the upper portion of the stack and gave 37169-S instead of 371169-S for the final washer."
       },
       {
         "model": "openai/gpt-5.6-sol-pro",
@@ -507,6 +653,14 @@ const EXAMPLE_RESULTS = {
         "status": "incomplete",
         "answer": null,
         "note": "The provider returned an error with no final answer. Scored zero; this does not establish what the model would have answered."
+      },
+      {
+        "model": "openai/gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "score": 0.0,
+        "status": "incorrect",
+        "answer": "The supplied illustration does not provide enough clear information to identify the parts that 5495 passes through.",
+        "note": "Said the illustration was not clear enough to identify the parts, and did not provide a list."
       },
       {
         "model": "bytedance-seed/seed-2-1-turbo",

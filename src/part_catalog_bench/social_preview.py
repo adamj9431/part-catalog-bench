@@ -7,6 +7,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 LABELS = {
     "openai/gpt-6-astra": "GPT-6 Astra",
+    "openai/gpt-6-luna": "GPT-6 Luna",
+    "openai/gpt-6-sol": "GPT-6 Sol",
+    "anthropic/claude-opus-5.5": "Claude Opus 5.5",
     "anthropic/claude-fable-5.1": "Claude Fable 5.1",
     "openai/gpt-5.6-sol-pro": "GPT-5.6 Sol Pro",
     "google/gemini-3.8-flash": "Gemini 3.8 Flash",
