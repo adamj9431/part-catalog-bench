@@ -22,7 +22,7 @@ def test_social_frontier():
 
 def test_static_sharing_metadata_points_to_generated_image():
     html = Path("site/index.html").read_text()
-    url = "https://adamj9431.github.io/part-catalog-bench/data/pareto-preview.png"
+    url = "https://partcatalogbench.adamjohnson.site/data/pareto-preview.png"
     assert f'property="og:image" content="{url}"' in html
     assert f'name="twitter:image" content="{url}"' in html
     assert 'name="twitter:card" content="summary_large_image"' in html

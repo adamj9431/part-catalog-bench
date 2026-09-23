@@ -93,9 +93,14 @@ from the cost frontier. The frontier is based on observed point estimates.
 Link previews use `site/data/pareto-preview.png`, a static 1200×630 chart generated
 automatically by `export-site` from public aggregates. Open Graph and Twitter
 metadata are in the initial HTML, so preview crawlers do not need JavaScript.
-The absolute URLs assume `https://adamj9431.github.io/part-catalog-bench/`; update
+The absolute URLs assume `https://partcatalogbench.adamjohnson.site/`; update
 them if deploying elsewhere. Slack and Messages cannot fetch the local preview.
 They may also cache old previews after publication.
+
+The custom hostname is configured in GitHub Pages settings. At Name.com, the
+`partcatalogbench` CNAME points to `adamj9431.github.io` (without a repository
+path). This site deploys with GitHub Actions, so it does not require a `CNAME`
+file. Keep HTTPS enforcement enabled after GitHub provisions the certificate.
 
 The site has a citation section and downloadable `site/citation.bib`; the root
 `CITATION.cff` identifies Adam Johnson as the author. These pilot citations use
