@@ -4,6 +4,25 @@ const {test} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
+test('both pages share the parts-diagram favicon and burgundy browser theme',()=>{
+  for(const file of ['site/index.html','site/answer.html']) {
+    const html=fs.readFileSync(file,'utf8');
+    assert.ok(html.includes('<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">'));
+    assert.ok(html.includes('<meta name="theme-color" content="#852d3e">'));
+  }
+  const icon=fs.readFileSync('site/assets/favicon.svg','utf8');
+  assert.ok(icon.includes('viewBox="0 0 64 64"'));
+  assert.ok(icon.includes('exploded assembly'));
+});
+test('intro includes an accessible GitHub icon link next to the title',()=>{
+  const html=fs.readFileSync('site/index.html','utf8');
+  const heading=html.match(/<div class="intro-heading">([\s\S]*?)<\/div>/)[1];
+  assert.ok(heading.includes('<h1 id="title">Part Catalog Bench</h1>'));
+  assert.ok(heading.includes('href="https://github.com/adamj9431/part-catalog-bench"'));
+  assert.ok(heading.includes('aria-label="View Part Catalog Bench on GitHub"'));
+  assert.ok(heading.includes('aria-hidden="true"'));
+  assert.ok(heading.includes('<span>GitHub</span>'));
+});
 test('catalog description and purchase link are part of the methodology introduction',()=>{
   const html=fs.readFileSync('site/index.html','utf8');
   const section=html.match(/<section id="methodology"[\s\S]*?<\/section>/)[0];
@@ -211,6 +230,43 @@ test('model activation scrolls and focuses details, but initial selection does n
   const script=fs.readFileSync('site/app.js','utf8');
   assert.ok(script.includes('selectModel(g.dataset.point, true)'));
   assert.ok(script.includes('toggleModel(b.dataset.model)'));
+});
+test('chart and SVG download use the site burgundy accent',()=>{
+  const css=fs.readFileSync('site/styles.css','utf8');
+  const accent=css.match(/--accent:(#[0-9a-f]{6})/)[1];
+  for(const compact of [false,true]) {
+    context.compact=compact;
+    const svg=vm.runInContext('chartMarkup(rows,compact)',context);
+    assert.ok(svg.includes('stroke="'+accent+'" stroke-width="2" stroke-dasharray="6 5"'));
+    assert.ok(svg.includes('fill="'+accent+'"'));
+    assert.ok(!svg.includes('#1558d6'));
+  }
+  assert.ok(css.includes('.key-line{border-top-color:var(--accent)}'));
+});
+test('breakdowns use burgundy bars and warm neutral surfaces',()=>{
+  const css=fs.readFileSync('site/styles.css','utf8');
+  for(const rule of [
+    '.bar-fill{background:var(--accent)}',
+    '.bar-track{background:#e7e1dc}',
+    '.model-detail-row>td{background:var(--paper)}',
+    '#results th{background:#f2efeb}',
+    '#results tbody tr:hover{background:var(--accent-soft)}'
+  ]) assert.ok(css.includes(rule));
+});
+test('opening model details never persists a chart or table selection',()=>{
+  vm.runInContext('data={models:rows};expandedModels.clear();renderChart()',context);
+  const chartBefore=element('#chart').innerHTML;
+  vm.runInContext('selectModel(rows[0].model);toggleModel(rows[1].model)',context);
+  assert.equal(element('#chart').innerHTML,chartBefore);
+  assert.ok(!element('#leaderboard').innerHTML.includes('class="selected"'));
+  const svg=vm.runInContext('chartMarkup(rows)',context);
+  const dots=[...svg.matchAll(/<circle class="model-dot"[^>]*>/g)];
+  assert.ok(dots.length>0);
+  assert.ok(dots.every(([dot])=>dot.includes('r="6"')));
+  const css=fs.readFileSync('site/styles.css','utf8');
+  assert.ok(css.includes('[data-point]:hover .model-dot{r:8px}'));
+  assert.ok(css.includes('[data-point]:focus-visible .model-dot{r:8px}'));
+  assert.ok(!css.includes('tbody tr.selected'));
 });
 test('inline disclosures retain independent breakdowns through sorting and reopening',()=>{
   vm.runInContext('expandedModels.clear();selectModel(rows[0].model);selectModel(rows[1].model);breakdowns.set(rows[0].model,"by_category");sortKey="cost_usd";direction=1;renderTable()',context);

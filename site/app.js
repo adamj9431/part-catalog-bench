@@ -27,7 +27,7 @@ const pct = (v) => v == null ? "—" : `${(v * 100).toFixed(1)}%`;
 const money = (v) => v == null ? "Unreported" : `$${v.toFixed(2)}`;
 const seconds = (v) => v == null ? "—" : `${v.toFixed(1)} s`;
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let data, selected, sortKey = "score", direction = -1;
+let data, sortKey = "score", direction = -1;
 const expandedModels = new Set(), breakdowns = new Map();
 const modelIndex = model => data.models.findIndex(r => r.model === model);
 
@@ -53,7 +53,7 @@ function renderTable() {
   const efficient = new Set(frontier(data.models).map(r => r.model));
   $("#leaderboard").innerHTML = sortedRows(data.models,sortKey,direction).map(r => {
     const index=modelIndex(r.model), expanded=expandedModels.has(r.model);
-    return `<tr class="${selected === r.model ? "selected" : ""}">
+    return `<tr>
     <td><button id="model-toggle-${index}" class="model-button" data-model="${esc(r.model)}" aria-expanded="${expanded}" aria-controls="model-detail-${index}"><span class="disclosure" aria-hidden="true">${expanded ? "▾" : "▸"}</span>${esc(name(r))}</button>${efficient.has(r.model) ? '<span class="frontier-tag">FRONTIER</span>' : ""}</td>
     <td class="score">${pct(r.score)}</td><td>${pct(r.ci95[0])}–${pct(r.ci95[1])}</td>
     <td>${money(r.cost_usd)}</td><td>${seconds(r.median_seconds)}</td><td class="${r.failed_responses ? "failure" : ""}">${r.failed_responses}/${r.questions}<small>${pct(r.failed_responses / r.questions)}</small></td>
@@ -111,10 +111,10 @@ function chartMarkup(rows, compact = false) {
   svg += `<text x="${left}" y="14" font-size="12">Score</text><text x="${left+plotWidth/2}" y="${height-12}" text-anchor="middle">Cost for all questions (USD · log scale)</text></g>`;
   const efficient = frontier(rows);
   const efficientIds = new Set(efficient.map(r=>r.model));
-  if(efficient.length>1) svg += `<polyline points="${efficient.map(r=>`${x(r.cost_usd)},${y(r.score)}`).join(" ")}" fill="none" stroke="#1558d6" stroke-width="2" stroke-dasharray="6 5"/>`;
+  if(efficient.length>1) svg += `<polyline points="${efficient.map(r=>`${x(r.cost_usd)},${y(r.score)}`).join(" ")}" fill="none" stroke="#852d3e" stroke-width="2" stroke-dasharray="6 5"/>`;
   const occupied = [];
   eligible.forEach(r => {
-    const cx=x(r.cost_usd), cy=y(r.score), color=efficientIds.has(r.model)?"#1558d6":"#58758e";
+    const cx=x(r.cost_usd), cy=y(r.score), color=efficientIds.has(r.model)?"#852d3e":"#58758e";
     const label=name(r), estimatedWidth=label.length*(compact?6.1:7.3);
     let tx=cx+12, anchor="start", ty=cy-12;
     if(tx+estimatedWidth>width-right+35){tx=cx-12;anchor="end";}
@@ -122,7 +122,7 @@ function chartMarkup(rows, compact = false) {
     let boxX=anchor==="end"?tx-estimatedWidth:tx;
     for(let attempt=0;attempt<10 && occupied.some(b=>Math.abs(b.y-ty)<19 && boxX<b.x+b.w+6 && boxX+estimatedWidth>b.x-6);attempt++) ty+=19;
     ty=Math.max(18,Math.min(height-bottom-4,ty));occupied.push({x:boxX,y:ty,w:estimatedWidth});
-    svg += `<g data-point="${esc(r.model)}" tabindex="0" role="button" aria-label="${esc(name(r))}: ${pct(r.score)}, ${money(r.cost_usd)}. Show details." style="cursor:pointer"><title>${esc(name(r))}: ${pct(r.score)}, ${money(r.cost_usd)}; CI ${pct(r.ci95[0])}–${pct(r.ci95[1])}</title><line x1="${cx}" x2="${cx}" y1="${y(r.ci95[1])}" y2="${y(r.ci95[0])}" stroke="${color}" opacity=".55" stroke-width="2"/><path d="M${cx-5},${y(r.ci95[1])}h10 M${cx-5},${y(r.ci95[0])}h10" fill="none" stroke="${color}"/><circle cx="${cx}" cy="${cy}" r="${r.model===selected?8:6}" fill="${color}" stroke="white" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="15" fill="transparent"/><text x="${tx}" y="${ty}" text-anchor="${anchor}" font-family="Arial, sans-serif" font-size="${compact?12:14}" font-weight="600" fill="#152637" stroke="white" stroke-width="4" paint-order="stroke">${esc(label)}</text></g>`;
+    svg += `<g data-point="${esc(r.model)}" tabindex="0" role="button" aria-label="${esc(name(r))}: ${pct(r.score)}, ${money(r.cost_usd)}. Show details." style="cursor:pointer"><title>${esc(name(r))}: ${pct(r.score)}, ${money(r.cost_usd)}; CI ${pct(r.ci95[0])}–${pct(r.ci95[1])}</title><line x1="${cx}" x2="${cx}" y1="${y(r.ci95[1])}" y2="${y(r.ci95[0])}" stroke="${color}" opacity=".55" stroke-width="2"/><path d="M${cx-5},${y(r.ci95[1])}h10 M${cx-5},${y(r.ci95[0])}h10" fill="none" stroke="${color}"/><circle class="model-dot" cx="${cx}" cy="${cy}" r="6" fill="${color}" stroke="white" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="15" fill="transparent"/><text x="${tx}" y="${ty}" text-anchor="${anchor}" font-family="Arial, sans-serif" font-size="${compact?12:14}" font-weight="600" fill="#152637" stroke="white" stroke-width="4" paint-order="stroke">${esc(label)}</text></g>`;
   });
   return svg+"</svg>";
 }
@@ -146,7 +146,7 @@ function renderChart() {
   });
 }
 function selectModel(model, jumpToDetails = false) {
-  selected=model;expandedModels.add(model);renderTable();renderChart();
+  expandedModels.add(model);renderTable();
   if (jumpToDetails) {
     const detail = $(`#model-toggle-${modelIndex(model)}`);
     detail.focus({preventScroll:true});
@@ -156,7 +156,7 @@ function selectModel(model, jumpToDetails = false) {
 function toggleModel(model) {
   if (expandedModels.has(model)) expandedModels.delete(model);
   else expandedModels.add(model);
-  selected=model;renderTable();renderChart();
+  renderTable();
   $(`#model-toggle-${modelIndex(model)}`).focus({preventScroll:true});
 }
 function openModelLink(hash = window.location.hash) {

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Part Catalog Bench — exploded assembly</title>
+  <rect width="64" height="64" rx="13" fill="#852d3e"/>
+  <path d="M32 7v50" stroke="#efc7c6" stroke-width="2" stroke-dasharray="3 4"/>
+  <g fill="#852d3e" stroke="#fff9f0" stroke-width="3">
+    <ellipse cx="32" cy="16" rx="16" ry="7"/>
+    <ellipse cx="32" cy="32" rx="16" ry="7"/>
+    <ellipse cx="32" cy="48" rx="16" ry="7"/>
+  </g>
+  <g fill="#fff9f0">
+    <ellipse cx="32" cy="16" rx="4" ry="2"/>
+    <ellipse cx="32" cy="32" rx="4" ry="2"/>
+    <ellipse cx="32" cy="48" rx="4" ry="2"/>
+  </g>
+</svg>
